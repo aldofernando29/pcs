@@ -1,29 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/secondscreen.dart';
+import 'package:flutter_application_1/thirdscreen.dart';
 
-import 'package:flutter/material.dart'; 
-import 'package:flutter_application_1/secondscreen.dart'; 
- 
-class firstscreen extends StatelessWidget { 
-  const firstscreen({super.key}); 
- 
-  @override 
-  Widget build(BuildContext context) { 
-    return Scaffold( 
-      appBar: AppBar( 
-        title: Text("lAYAR UTAMA"), 
-        backgroundColor: Colors.amber, 
-      ), 
-      body: Center( 
-        child: ElevatedButton( 
-          onPressed: () { 
-            Navigator.push(context, 
-                MaterialPageRoute(builder: ((context) => secondscreen() 
-                ), 
-                ), 
-                ); 
-          }, 
-          child: Text("MENUJU LAYAR KEDUA "), 
-        ), 
-      ), 
-    ); 
-  } 
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
+
+  Future<void> _NavigateScreen(BuildContext context) async {
+    final result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => thirdscreen()));
+
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('$result')));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Layar Pertama'),
+        backgroundColor: Colors.red,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            secondscreen(data: 'Data dari First Screen')));
+              },
+              child: Text('Menuju Kelayar Kedua'),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _NavigateScreen(context);
+                },
+                child: Text('Menuju Layar Ketiga')),
+            SizedBox(
+              height: 15,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/fourth');
+                },
+                child: Text("menuju layar ke empat"))
+          ],
+        ),
+      ),
+    );
+  }
 }

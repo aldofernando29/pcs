@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/firstscreen.dart'; 
+import 'package:flutter_application_1/firstscreen.dart';
+import 'package:flutter_application_1/secondscreen.dart';
+import 'package:flutter_application_1/thirdscreen.dart';
+import 'package:flutter_application_1/fourthscreen.dart';
  
-void main() { 
-  runApp(MyApp()); 
-} 
- 
-class MyApp extends StatelessWidget { 
-  const MyApp({super.key}); 
- 
-  @override 
-  Widget build(BuildContext context) { 
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
-      home: firstscreen(),
+      home: FirstScreen(),
       debugShowCheckedModeBanner: false,
+      routes: {
+         '/fourth':(context) => fourthscreen(),  
+
+      },
     );
-  } 
+  }
 }
